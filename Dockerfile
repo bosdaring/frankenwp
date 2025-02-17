@@ -68,6 +68,12 @@ RUN install-php-extensions \
     intl \
     mysqli \
     zip \
+    mbstring \
+    exif \
+    curl \
+    pcre \
+    xml \
+    redis \
     # See https://github.com/Imagick/imagick/issues/640#issuecomment-2077206945
     imagick/imagick@master \
     opcache
@@ -107,9 +113,9 @@ RUN { \
 
 
 WORKDIR /var/www/html
-
-VOLUME /var/www/html/wp-content
-
+# Change mount volume to /var/www/html instead of wp-content to easily update the wordpress core
+#VOLUME /var/www/html/wp-content
+VOLUME /var/www/html
 
 COPY wp-content/mu-plugins /var/www/html/wp-content/mu-plugins
 RUN mkdir /var/www/html/wp-content/cache
